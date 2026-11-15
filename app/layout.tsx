@@ -1,5 +1,3 @@
-import Header from "./sticky/header"; 
-import CurrentPage from "./sticky/current-page";
 import "./globals.css";
 
 

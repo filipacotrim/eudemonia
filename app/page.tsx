@@ -2,7 +2,7 @@
 import { useState } from "react";
 import CurrentPage from "./sticky/current-page";
 import Header from "./sticky/header";
-
+import Agenda from "./data/current-agenda";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState('agenda');
@@ -11,7 +11,10 @@ export default function Home() {
    
     <div >
        <Header currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-        <CurrentPage currentPage={currentPage}/>
+       <CurrentPage currentPage={currentPage}/>
+        {currentPage === 'agenda' && <Agenda />}
+        {currentPage === 'sobre nós' && <div>Sobre Nós Content</div>}
+        {currentPage === 'FAQs' && <div>FAQs Content</div>}
     </div>
   );
 }

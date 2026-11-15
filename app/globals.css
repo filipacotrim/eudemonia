@@ -5,3 +5,14 @@ body {
   background: #F1EFE7;
   color:  #000000;
 }
+
+.description {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #000000;
+}
+
+
+/* eventItem {
+  background: rgba(250, 162, 80, 0.2);
+  font-family: 'IBM Plex Mono', monospace;
+} */

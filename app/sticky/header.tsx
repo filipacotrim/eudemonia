@@ -2,7 +2,7 @@
 export default function Header({ currentPage, setCurrentPage }: { currentPage: string; setCurrentPage: (page: string) => void }) {
 
     return (
-        <nav style={{position: "sticky", display: "flex", color: "#000000", justifyContent: "space-between", alignItems: "center", padding: "1rem", fontWeight: "bold"}}>
+        <nav style={{position: "sticky", display: "flex", color: "#000000", justifyContent: "space-between", alignItems: "center", padding: "1rem", fontWeight: "bold", top: 0}}>
             <div>
                 <a style={{margin: "0 2rem 0 0", cursor: "pointer", textDecoration: currentPage === "sobre nós" ? "underline" : "none"}} onClick={() => setCurrentPage("sobre nós")}>
                     sobre nós
