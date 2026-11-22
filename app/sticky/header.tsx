@@ -25,7 +25,7 @@ export default function Header({ currentPage, setCurrentPage }: { currentPage: s
 
     const linkStyle = (page: string) => ({
         cursor: "pointer",
-        textDecoration: currentPage === page ? "underline" : "none",
+        textDecorationLine: currentPage === page ? "underline" : "none",
         textDecorationColor: isMenuOpen ? "#FAA250" : ""
         
     });
@@ -83,7 +83,7 @@ export default function Header({ currentPage, setCurrentPage }: { currentPage: s
       </button>
 
       {isMenuOpen && (
-        <MobileHeader linkStyle={linkStyle} selectPage={setCurrentPage}/>
+        <MobileHeader linkStyle={linkStyle} currentPage={currentPage}  setCurrentPage={setCurrentPage}/>
       )}
     </nav>
   );
