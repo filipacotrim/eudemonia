@@ -55,6 +55,7 @@ export default function MobileHeader({
               ...linkStyle(page),
               position: "relative",
               zIndex: 1,
+              fontSize: "20px"
             }}
             onClick={() => setCurrentPage(page)}
           >
