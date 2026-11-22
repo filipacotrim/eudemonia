@@ -1,24 +1,90 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import MobileHeader from "./mobile-header"
+
 
 export default function Header({ currentPage, setCurrentPage }: { currentPage: string; setCurrentPage: (page: string) => void }) {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    useEffect(() => {
+        const breakpoint = window.matchMedia("(min-width: 40rem)");
+
+        const closeMenuOnDesktop = (event: MediaQueryListEvent) => {
+            if (event.matches) setIsMenuOpen(false);
+        };
+
+        breakpoint.addEventListener("change", closeMenuOnDesktop);
+        return () => breakpoint.removeEventListener("change", closeMenuOnDesktop);
+    }, []);
+    
+    const selectPage = (page: string) => {
+        setCurrentPage(page);
+        setIsMenuOpen(false);
+    };
+
+    const linkStyle = (page: string) => ({
+        cursor: "pointer",
+        textDecoration: currentPage === page ? "underline" : "none",
+        textDecorationColor: isMenuOpen ? "#FAA250" : ""
+        
+    });
 
     return (
-        <nav style={{position: "sticky", display: "flex", color: "#000000", justifyContent: "space-between", alignItems: "center", padding: "1rem", fontWeight: "bold", top: 0}}>
-            <div>
-                <a style={{margin: "0 2rem 0 0", cursor: "pointer", textDecoration: currentPage === "sobre nós" ? "underline" : "none"}} onClick={() => setCurrentPage("sobre nós")}>
-                    sobre nós
-                </a>
-                <a style={{textDecoration: currentPage === "agenda" ? "underline" : "none", cursor: "pointer"}} onClick={() => setCurrentPage("agenda")}>
-                    agenda
-                </a>
-         
-            </div>
+        <nav
+            className="relative z-10"
+            style={{
+                position: "sticky",
+                display: "flex",
+                color: "#000000",
+                backgroundColor: isMenuOpen ? "#FFF18D" : "",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "1rem",
+                fontWeight: "bold",
+                top: 0,
+            }}
+        >
+        <button
+            type="button"
+            className="sm:hidden"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+        <img src={"/menu.svg"} alt={'menu'} style={{height: "24px", width: "24px", top: 0}} />
 
-            <div >
-                <a  className="hover:underline" style={{textDecoration: currentPage === "FAQs" ? "underline" : "none", cursor: "pointer"}} onClick={() => setCurrentPage("FAQs")}>
-                    FAQs
-                </a>
-            
-            </div>
-        </nav>
+        </button>
+        <div className="hidden sm:flex">
+            <button
+            type="button"
+            style={{ ...linkStyle("sobre nós"), marginRight: "2rem" }}
+            onClick={() => selectPage("sobre nós")}
+            >
+            sobre nós
+            </button>
+            <button
+            type="button"
+            style={linkStyle("agenda")}
+            onClick={() => selectPage("agenda")}
+            >
+            agenda
+            </button>
+      </div>
+
+      <button
+        type="button"
+        className="hidden sm:block"
+        style={linkStyle("FAQs")}
+        onClick={() => selectPage("FAQs")}
+      >
+        FAQs
+      </button>
+
+      {isMenuOpen && (
+        <MobileHeader linkStyle={linkStyle} selectPage={setCurrentPage}/>
+      )}
+    </nav>
   );
 }
