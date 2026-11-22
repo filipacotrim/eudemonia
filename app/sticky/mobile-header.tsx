@@ -6,7 +6,7 @@ export default function MobileHeader({
   linkStyle,
 }: {
   setCurrentPage: (page: string) => void;
-  currentPage: string,
+  currentPage: string;
   linkStyle: (page: string) => CSSProperties;
 }) {
   return (
@@ -34,28 +34,29 @@ export default function MobileHeader({
             alignItems: "center",
           }}
         >
-          {currentPage === page ?
+          {currentPage === page ? (
             <img
-            src="/CIRCULO.svg"
-            alt=""
-            aria-hidden="true"
-            style={{
-              width:  page == "agenda" ? "5rem" : page == "FAQs" ? "4rem" : "6rem",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              pointerEvents: "none",
-            }}
-          />
-        : null }
+              src="/CIRCULO.svg"
+              alt=""
+              aria-hidden="true"
+              style={{
+                width:
+                  page === "agenda" ? "5rem" : page === "FAQs" ? "4rem" : "6rem",
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                pointerEvents: "none",
+              }}
+            />
+          ) : null}
           <button
             type="button"
             style={{
               ...linkStyle(page),
               position: "relative",
               zIndex: 1,
-              fontSize: "20px"
+              fontSize: "20px",
             }}
             onClick={() => setCurrentPage(page)}
           >
@@ -63,6 +64,58 @@ export default function MobileHeader({
           </button>
         </div>
       ))}
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+          marginTop: "2rem",
+        }}
+      >
+        {["contactos", "contribuir"].map((page) => (
+          <div
+            key={page}
+            style={{
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+              margin: "auto",
+              alignItems: "center",
+            }}
+          >
+            {currentPage === page ? (
+              <img
+                src="/CIRCULO.svg"
+                alt=""
+                aria-hidden="true"
+                style={{
+                  width: "5rem",
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  pointerEvents: "none",
+                }}
+              />
+            ) : null}
+            <button
+              type="button"
+              style={{
+                ...linkStyle(page),
+                position: "relative",
+                zIndex: 1,
+                fontSize: "15px",
+              }}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
