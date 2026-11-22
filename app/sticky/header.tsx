@@ -1,22 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import MobileHeader from "./mobile-header"
 
 
-export default function Header({ currentPage, setCurrentPage }: { currentPage: string; setCurrentPage: (page: string) => void }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    useEffect(() => {
-        const breakpoint = window.matchMedia("(min-width: 40rem)");
-
-        const closeMenuOnDesktop = (event: MediaQueryListEvent) => {
-            if (event.matches) setIsMenuOpen(false);
-        };
-
-        breakpoint.addEventListener("change", closeMenuOnDesktop);
-        return () => breakpoint.removeEventListener("change", closeMenuOnDesktop);
-    }, []);
+export default function Header({ currentPage, setCurrentPage, isMenuOpen, setIsMenuOpen }: { currentPage: string; setCurrentPage: (page: string) => void, isMenuOpen : boolean, setIsMenuOpen : (boolean) => void }) {
     
     const selectPage = (page: string) => {
         setCurrentPage(page);
