@@ -3,7 +3,7 @@ import Logo from './logo'
 
 const myFont = localFont({ src: '../stuff/myfont.ttf' })
 
-export default function CurrentPage({ currentPage }: { currentPage?: string }) {
+export default function CurrentPage({ currentPage, isMobile }: { currentPage?: string, isMobile: boolean }) {
     return (
             <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "min-content",  textAlign: "center"}}>
                 <div>
@@ -17,7 +17,7 @@ export default function CurrentPage({ currentPage }: { currentPage?: string }) {
                         {currentPage[0]}{currentPage[1].toUpperCase() + currentPage.slice(2)?.normalize("NFD").replace(/[\u0300-\u036f]/g, "")}
                     </p>
                 </div>
-                <Logo/>
+                {!isMobile && <Logo/> }
             </div>
   );
 }

@@ -28,14 +28,14 @@ export default function Home() {
 
   return (
     <div>
-       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
-       <CurrentPage currentPage={currentPage}/>
+       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} isMobile={isMobile}/>
+       <CurrentPage currentPage={currentPage} isMobile={isMobile}/>
         {currentPage === 'agenda' && <Agenda />}
         {currentPage === 'sobre nós' && <div>Sobre Nós Content</div>}
         {currentPage === 'FAQs' && <div>FAQs Content</div>}
         {currentPage === 'contactos' && <div>Contactos Content</div>}
         {currentPage === 'contribuir' && <div>Contribuir Content</div>}
-        <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} isMobile={isMobile} />
+        {!isMobile && <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} />}
     </div>
   );
 }
